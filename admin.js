@@ -1,4 +1,55 @@
 /**
+ * Fast client-side image compressor using HTML5 canvas
+ * Resizes huge smartphone photos (15MB+) down to ~100KB web-ready data URLs
+ */
+function compressImage(file, maxWidth = 800, maxHeight = 1000, quality = 0.82) {
+  return new Promise((resolve, reject) => {
+    if (file.type === 'image/svg+xml') {
+      const reader = new FileReader();
+      reader.onload = e => resolve(e.target.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = Math.round((width * maxHeight) / height);
+            height = maxHeight;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const compressed = canvas.toDataURL('image/jpeg', quality);
+        resolve(compressed);
+      };
+      img.onerror = () => resolve(e.target.result);
+      img.src = e.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+
+/**
  * Naman Daryani - Owner Admin Panel & CMS Engine
  * Allows visual editing of all card content, photos, company details, and PIN
  */
@@ -83,51 +134,61 @@ function setupAdminCMS() {
 
     const notifyEl = document.getElementById('adminSaveNotification');
 
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      const dataUrl = event.target.result;
-      adminAvatarPreview.innerHTML = `<img src="${dataUrl}" alt="Avatar Preview">`;
-
-      // Upload to server to prevent huge base64 strings crashing localStorage
-      try {
-        if (notifyEl) {
-          notifyEl.style.display = 'block';
-          notifyEl.style.backgroundColor = 'rgba(255,255,255,0.1)';
-          notifyEl.style.color = '#fff';
-          notifyEl.textContent = 'Uploading photo...';
-        }
-
-        const res = await fetch('/api/upload-image', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            filename: 'profile_' + Date.now() + '.jpg',
-            base64Data: dataUrl
-          })
-        });
-
-        if (res.ok) {
-          const data = await res.json();
-          if (data.success) {
-            if (!cardData.profile) cardData.profile = {};
-            cardData.profile.avatar = data.path + '?v=' + Date.now(); // cache buster
-            if (notifyEl) notifyEl.style.display = 'none';
-          }
-        }
-      } catch (err) {
-        console.error("Image upload failed", err);
-        if (notifyEl) {
-          notifyEl.style.backgroundColor = 'rgba(255,50,50,0.2)';
-          notifyEl.style.color = '#ff6666';
-          notifyEl.textContent = 'Upload failed, falling back to local base64';
-          setTimeout(() => notifyEl.style.display = 'none', 3000);
-        }
-        // Fallback to base64 if server upload fails
-        if (!cardData.profile) cardData.profile = {};
-        cardData.profile.avatar = dataUrl;
+    try {
+      if (notifyEl) {
+        notifyEl.className = 'cms-toast notification-bar';
+        notifyEl.style.display = 'block';
+        notifyEl.style.backgroundColor = 'rgba(255,255,255,0.1)';
+        notifyEl.style.color = '#fff';
+        notifyEl.textContent = 'Optimizing photo...';
       }
-    };
-    reader.readAsDataURL(file);
+
+      // Fast client-side compression (<150KB)
+      const compressedDataUrl = await compressImage(file, 800, 1000, 0.82);
+      adminAvatarPreview.innerHTML = `<img src="${compressedDataUrl}" alt="Avatar Preview">`;
+
+      if (!cardData.profile) cardData.profile = {};
+      cardData.profile.avatar = compressedDataUrl;
+
+      // If running on local Node server, also persist image file to disk
+      const isLocalServer = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+      if (isLocalServer) {
+        try {
+          const res = await fetch('/api/upload-image', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              filename: 'profile_' + Date.now() + '.jpg',
+              base64Data: compressedDataUrl
+            })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data.success) {
+              cardData.profile.avatar = data.path + '?v=' + Date.now();
+            }
+          }
+        } catch (serverErr) {
+          console.log('Local server upload skipped, using optimized data URL');
+        }
+      }
+
+      if (notifyEl) {
+        notifyEl.className = 'cms-toast notification-bar success';
+        notifyEl.style.backgroundColor = 'rgba(50, 200, 100, 0.2)';
+        notifyEl.style.color = '#4ade80';
+        notifyEl.textContent = '✓ Photo updated! Click "Save Changes" below to apply.';
+        setTimeout(() => { notifyEl.style.display = 'none'; }, 3000);
+      }
+    } catch (err) {
+      console.error('Photo optimization error:', err);
+      if (notifyEl) {
+        notifyEl.style.backgroundColor = 'rgba(255,50,50,0.2)';
+        notifyEl.style.color = '#ff6666';
+        notifyEl.textContent = 'Error loading image. Please try another image.';
+        setTimeout(() => { notifyEl.style.display = 'none'; }, 3000);
+      }
+    }
   });
 
   removeAvatarBtn.addEventListener('click', () => {
@@ -455,49 +516,63 @@ function renderBusinessForms() {
       if (!file) return;
       
       const idx = parseInt(e.target.getAttribute('data-index'));
-      const reader = new FileReader();
       const notifyEl = document.getElementById('adminSaveNotification');
+      const preview = e.target.closest('.field-item').querySelector('.biz-logo-preview');
       
-      reader.onload = async (event) => {
-        const dataUrl = event.target.result;
-        const preview = e.target.closest('.field-item').querySelector('.biz-logo-preview');
-        preview.innerHTML = `<img src="${dataUrl}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+      try {
+        if (notifyEl) {
+          notifyEl.className = 'cms-toast notification-bar';
+          notifyEl.style.display = 'block';
+          notifyEl.style.backgroundColor = 'rgba(255,255,255,0.1)';
+          notifyEl.style.color = '#fff';
+          notifyEl.textContent = 'Optimizing logo...';
+        }
+
+        const compressedDataUrl = await compressImage(file, 400, 400, 0.88);
+        preview.innerHTML = `<img src="${compressedDataUrl}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
         
-        try {
-          if (notifyEl) {
-            notifyEl.className = 'cms-toast notification-bar';
-            notifyEl.style.display = 'block';
-            notifyEl.style.backgroundColor = 'rgba(255,255,255,0.1)';
-            notifyEl.style.color = '#fff';
-            notifyEl.textContent = 'Uploading logo...';
-          }
-          
-          const res = await fetch('/api/upload-image', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              filename: 'biz_logo_' + Date.now() + '.png',
-              base64Data: dataUrl
-            })
-          });
-          
-          const data = await res.json();
-          if (data.success) {
-            cardData.businesses[idx].logo = data.path + '?v=' + Date.now();
-            if (notifyEl) notifyEl.style.display = 'none';
-          }
-        } catch (err) {
-          console.error("Logo upload failed", err);
-          cardData.businesses[idx].logo = dataUrl; // fallback
-          if (notifyEl) {
-            notifyEl.style.backgroundColor = 'rgba(255,50,50,0.2)';
-            notifyEl.style.color = '#ff6666';
-            notifyEl.textContent = 'Upload failed, saved locally';
-            setTimeout(() => notifyEl.style.display = 'none', 3000);
+        if (!cardData.businesses) cardData.businesses = [];
+        if (!cardData.businesses[idx]) cardData.businesses[idx] = {};
+        cardData.businesses[idx].logo = compressedDataUrl;
+
+        const isLocalServer = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+        if (isLocalServer) {
+          try {
+            const res = await fetch('/api/upload-image', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                filename: 'biz_logo_' + Date.now() + '.png',
+                base64Data: compressedDataUrl
+              })
+            });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.success) {
+                cardData.businesses[idx].logo = data.path + '?v=' + Date.now();
+              }
+            }
+          } catch (serverErr) {
+            console.log('Local server upload skipped, using optimized data URL');
           }
         }
-      };
-      reader.readAsDataURL(file);
+
+        if (notifyEl) {
+          notifyEl.className = 'cms-toast notification-bar success';
+          notifyEl.style.backgroundColor = 'rgba(50, 200, 100, 0.2)';
+          notifyEl.style.color = '#4ade80';
+          notifyEl.textContent = '✓ Logo updated! Click "Save Changes" below to apply.';
+          setTimeout(() => { notifyEl.style.display = 'none'; }, 3000);
+        }
+      } catch (err) {
+        console.error('Logo upload error:', err);
+        if (notifyEl) {
+          notifyEl.style.backgroundColor = 'rgba(255,50,50,0.2)';
+          notifyEl.style.color = '#ff6666';
+          notifyEl.textContent = 'Error loading logo.';
+          setTimeout(() => { notifyEl.style.display = 'none'; }, 3000);
+        }
+      }
     });
   });
 }
