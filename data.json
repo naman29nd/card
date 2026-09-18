@@ -1,0 +1,110 @@
+{
+  "profile": {
+    "name": "Naman Daryani",
+    "title": "Founder & Director",
+    "birthday": "2001-07-29",
+    "birthdayDisplay": "29 July 2001",
+    "location": "Indore, Madhya Pradesh, India",
+    "phone": "+918602679814",
+    "phoneDisplay": "+918602679814",
+    "whatsapp": "+918602679814",
+    "instagram": "naman_daryani",
+    "bio": "Entrepreneur based in Indore, MP. Building Exharnet (Interior & Architectural Surfaces Wholesale across MP) and Geba India (Handcrafted Sustainable Luxury Accessories).",
+    "avatar": "assets/profile_1789737878950.jpg?v=1789737878975"
+  },
+  "businesses": [
+    {
+      "id": "exharnet",
+      "name": "Exharnet",
+      "tagline": "Architectural & Interior Surfaces Wholesale",
+      "coverage": "Wholesale Distribution Across Madhya Pradesh",
+      "description": "Premier wholesale hub in Indore supplying high-pressure Mica & Laminates, Fluted & Acoustic Louvers, ASA Weather-Resistant Sheets, and Acrylic Panels to architects, interior designers, and retail dealers all over MP.",
+      "products": [
+        {
+          "name": "Mica & Laminates",
+          "desc": "High-pressure decorative laminates in bespoke textures and luxury finishes."
+        },
+        {
+          "name": "Architectural Louvers",
+          "desc": "Fluted, interior acoustic, and exterior wall cladding louvers."
+        },
+        {
+          "name": "ASA Sheets",
+          "desc": "Weather-proof, UV-resistant exterior decorative panels."
+        },
+        {
+          "name": "Acrylic Surfaces",
+          "desc": "Ultra-gloss and scratch-resistant interior acrylic panels."
+        }
+      ],
+      "brands": [
+        {
+          "name": "Exharnet",
+          "logo": "assets/exharnet-logo.svg"
+        },
+        {
+          "name": "Linizio",
+          "logo": "assets/linizio-logo.svg"
+        },
+        {
+          "name": "Neolux",
+          "logo": "assets/neolux-logo.svg"
+        },
+        {
+          "name": "Acrika",
+          "logo": "assets/acrika-logo.svg"
+        },
+        {
+          "name": "Konex",
+          "logo": "assets/konex-logo.svg"
+        }
+      ],
+      "website": "https://exharnet.com",
+      "websiteStatus": "Coming Soon",
+      "instagram": "exharnet",
+      "logo": "assets/exharnet-logo.svg",
+      "whatsappMessage": "Hi Naman, I would like to inquire about wholesale catalog and pricing for Exharnet products in Madhya Pradesh.",
+      "category": "Architectural Wholesale",
+      "badge": "All MP Wholesale",
+      "theme": "",
+      "logoSize": 48
+    },
+    {
+      "id": "geba",
+      "name": "Geba India",
+      "tagline": "Conscious Luxury • Upcycled Handcrafted Bags",
+      "story": "Born from a family passion for mindful design, Geba gives beautiful, discarded fabrics a stunning second chapter. We meticulously handcraft single-edition pieces, turning rescued designer threads into personal, everyday luxury companions that belong only to you.",
+      "collections": [
+        {
+          "name": "Designer Pouches",
+          "desc": "Artisanal everyday carry pouches handcrafted from limited-edition fabrics."
+        },
+        {
+          "name": "Ivy Sling Bags",
+          "desc": "Signature ergonomic crossbody slings blending luxury and utilitarian style."
+        },
+        {
+          "name": "Everyday Totes",
+          "desc": "Spacious, heavy-duty statement totes made with rescued designer textiles."
+        },
+        {
+          "name": "Build A Kit",
+          "desc": "Curated luxury gift kits and customizable companion bundles."
+        }
+      ],
+      "website": "https://gebaindia.com",
+      "websiteStatus": "Live Store",
+      "instagram": "geba_official",
+      "logo": "assets/geba-logo.svg",
+      "whatsappMessage": "Hi Naman, I loved the Geba collection and would like to order or know more!",
+      "category": "Mindful Luxury Accessories",
+      "badge": "Live Store",
+      "theme": "geba-theme",
+      "description": "Born from a family passion for mindful design, Geba gives beautiful, discarded fabrics a stunning second chapter. We meticulously handcraft single-edition pieces, turning rescued designer threads into personal, everyday luxury companions that belong only to you.",
+      "logoSize": 80
+    }
+  ],
+  "security": {
+    "adminPin": "2907"
+  }
+}

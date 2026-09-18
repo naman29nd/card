@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Naman Daryani — Contact Card</title>
+  <meta name="description" content="Naman Daryani • Founder of Exharnet and Geba India. Indore, Madhya Pradesh.">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Ambient Backdrop -->
+  <div class="ios-ambient-blur"></div>
+
+  <!-- iOS Device Frame Container -->
+  <div class="ios-contact-container">
+
+    <!-- 1. IPHONE CONTACT POSTER (FULL BLEED HERO) -->
+    <header class="poster-hero">
+      
+      <!-- Top Navigation Pill (QR & Share) -->
+      <div class="poster-nav">
+        <div class="nfc-live-pill">
+          <span class="live-dot"></span>
+          <span>NFC Contact</span>
+        </div>
+        <div class="poster-nav-tools">
+          <button id="qrBtn" class="poster-glass-btn" title="Show QR Code" aria-label="Show QR Code">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          </button>
+          <button id="shareBtn" class="poster-glass-btn" title="Share Contact" aria-label="Share Contact">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Poster Image Background -->
+      <div class="poster-image-viewport">
+        <img id="posterImage" src="assets/profile.jpg" alt="Naman Daryani" class="poster-portrait" onerror="this.src='assets/default-poster.jpg'">
+        <div class="poster-cinematic-gradient"></div>
+      </div>
+
+      <!-- Poster Title Overlay (Apple Contact Poster Typography) -->
+      <div class="poster-caption">
+        <h1 class="poster-name" id="profileName">Naman Daryani</h1>
+        <p class="poster-title" id="profileTitle">Founder & Director</p>
+        <div class="poster-subtitle">
+          <span>Exharnet</span>
+          <span class="dot-sep">•</span>
+          <span>Geba India</span>
+          <span class="dot-sep">•</span>
+          <span>Indore, MP</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. ICONIC iOS CIRCULAR QUICK ACTIONS ROW -->
+    <section class="ios-actions-row">
+      
+      <!-- Action 1: Message (WhatsApp) -->
+      <a id="whatsappBtn" href="https://wa.me/918602679814" target="_blank" rel="noopener" class="ios-action-col">
+        <div class="ios-icon-disc btn-wa">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        </div>
+      </a>
+
+      <!-- Action 2: Call -->
+      <a id="callBtn" href="tel:+918602679814" class="ios-action-col">
+        <div class="ios-icon-disc btn-call">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+      </a>
+
+      <!-- Action 3: Save Contact (vCard) -->
+      <button id="saveContactBtn" class="ios-action-col">
+        <div class="ios-icon-disc btn-save">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        </div>
+      </button>
+
+      <!-- Action 4: Instagram -->
+      <a id="personalInstaBtn" href="https://instagram.com/naman_daryani" target="_blank" rel="noopener" class="ios-action-col">
+        <div class="ios-icon-disc btn-insta">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </div>
+      </a>
+
+    </section>
+
+    <!-- 3. iOS INSET GROUPED CARDS -->
+    <div class="ios-cards-container">
+
+      <!-- GROUP 1: DIRECT CONTACT INFORMATION (APPLE CONTACTS STYLE) -->
+      <div class="ios-group-card">
+        <div class="ios-row-item">
+          <span class="row-label">mobile</span>
+          <a href="tel:+918602679814" class="row-value link-val" id="profilePhone">+91 86026 79814</a>
+        </div>
+        <div class="ios-row-divider"></div>
+
+        <div class="ios-row-item">
+          <span class="row-label">whatsapp</span>
+          <a id="rowWhatsappLink" href="https://wa.me/918602679814" target="_blank" rel="noopener" class="row-value link-val">+91 86026 79814</a>
+        </div>
+        <div class="ios-row-divider"></div>
+
+        <div class="ios-row-item">
+          <span class="row-label">location</span>
+          <span class="row-value" id="profileLocation">Indore, Madhya Pradesh, India</span>
+        </div>
+        <div class="ios-row-divider"></div>
+
+        <div class="ios-row-item">
+          <span class="row-label">birthday</span>
+          <span class="row-value" id="profileBirthday">29 July 2001</span>
+        </div>
+        <div class="ios-row-divider"></div>
+
+        <div class="ios-row-item">
+          <span class="row-label">instagram</span>
+          <a id="profileInstagram" href="https://instagram.com/naman_daryani" target="_blank" rel="noopener" class="row-value link-val">@naman_daryani</a>
+        </div>
+      </div>
+
+      <!-- GROUP 2: EXECUTIVE BIO NOTE -->
+      <div class="ios-group-card note-card">
+        <div class="row-header">notes</div>
+        <p class="note-text" id="profileBio">
+          Entrepreneur based in Indore, MP. Leading Exharnet (Interior & Architectural Surfaces Wholesale across MP) and Geba India (Mindful Handcrafted Sustainable Luxury Accessories).
+        </p>
+      </div>
+
+      <!-- TEMPLATE FOR DYNAMIC BUSINESSES -->
+      <template id="businessCardTemplate">
+        <div class="ios-group-card venture-card-clean business-card">
+          <div class="venture-card-header">
+            <div class="venture-brand-col">
+              <span class="venture-category" data-bind="category"></span>
+              <img src="" alt="Logo" class="brand-logo-img" data-bind="logo" style="display:none; margin-top:8px; margin-bottom:8px;">
+              <h2 class="venture-clean-title" data-bind="name" style="display:none;"></h2>
+            </div>
+            <span class="status-chip neon-chip" data-bind="badge"></span>
+          </div>
+
+          <p class="venture-headline" data-bind="tagline"></p>
+          <p class="venture-clean-desc" data-bind="description"></p>
+
+          <!-- Dynamic Offerings List -->
+          <div class="offerings-list" data-bind="offeringsList"></div>
+
+          <!-- Actions -->
+          <div class="venture-actions-block">
+            <a href="#" target="_blank" rel="noopener" class="ios-clean-btn btn-glass-neon" data-bind="primaryBtn" style="display:none;">
+              <span data-bind="primaryBtnText"></span>
+            </a>
+            <a href="#" target="_blank" rel="noopener" class="ios-sub-link" data-bind="secondaryBtn" style="display:none;">
+              <span data-bind="secondaryBtnText"></span>
+              <span class="sub-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </template>
+
+      <!-- CONTAINER FOR DYNAMIC BUSINESSES -->
+      <div id="dynamicBusinessesContainer"></div>
+    <!-- 4. CLEAN MINIMAL FOOTER -->
+    <footer class="ios-footer">
+      <div class="footer-nfc-tag">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12a10 10 0 0 1 20 0"></path><path d="M6 12a6 6 0 0 1 12 0"></path><circle cx="12" cy="12" r="2"></circle></svg>
+        <span>NFC Tag Tap Active</span>
+      </div>
+      <p class="footer-credit">© <span id="currentYear">2026</span> Naman Daryani • Indore, MP</p>
+
+      <!-- Discreet Admin Lock -->
+      <button id="adminLoginBtn" class="admin-hidden-trigger" title="Owner Admin Login" aria-label="Owner Admin Login">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- QR CODE MODAL -->
+  <div id="qrModal" class="modal-backdrop">
+    <div class="ios-modal-card">
+      <div class="modal-nav">
+        <h3>Contact QR</h3>
+        <button id="closeQrModal" class="close-modal">&times;</button>
+      </div>
+      <div class="modal-content-center">
+        <div id="qrCanvasContainer" class="qr-frame"></div>
+        <p class="modal-sub">Scan with any smartphone camera</p>
+        <button id="copyLinkBtn" class="ios-sheet-btn">Copy Card Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- OWNER ADMIN CMS MODAL -->
+  <div id="adminModal" class="modal-backdrop">
+    <div class="ios-modal-card admin-width">
+      <div class="modal-nav">
+        <div class="admin-title-wrap">
+          <span>🔐</span>
+          <h3>Owner Card CMS</h3>
+        </div>
+        <button id="closeAdminModal" class="close-modal">&times;</button>
+      </div>
+
+      <!-- PIN AUTH -->
+      <div id="adminAuthView" class="modal-content-center">
+        <h4>Owner Access</h4>
+        <p class="modal-sub">Enter security PIN to edit your card details & images</p>
+        <div class="pin-entry-row">
+          <input type="password" id="adminPinInput" maxlength="8" placeholder="••••" class="ios-pin-input" inputmode="numeric">
+          <button id="submitPinBtn" class="ios-btn-accent">Unlock</button>
+        </div>
+        <p id="pinErrorMsg" class="error-text"></p>
+        <p class="hint-text">Default PIN: <code>2907</code></p>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div id="adminDashboardView" class="admin-dashboard-box" style="display: none;">
+        <div class="cms-tab-strip">
+          <button class="cms-tab-btn active" data-tab="adminTabProfile">Profile & Photo</button>
+          <button class="cms-tab-btn" data-tab="adminTabBusinesses">Businesses</button>
+          
+          <button class="cms-tab-btn" data-tab="adminTabSecurity">PIN</button>
+        </div>
+
+        <form id="adminForm" class="cms-form-body">
+          <!-- PROFILE TAB -->
+          <div id="adminTabProfile" class="cms-tab-pane active">
+            <div class="field-item">
+              <label>Contact Poster Photo</label>
+              <div class="upload-preview-flex">
+                <div class="poster-mini-preview" id="adminAvatarPreview">
+                  <img src="assets/default-poster.svg" alt="Preview">
+                </div>
+                <div class="upload-btns">
+                  <input type="file" id="profileImageInput" accept="image/*" class="file-hidden">
+                  <label for="profileImageInput" class="ios-upload-trigger">Upload My Photo</label>
+                  <button type="button" id="removeAvatarBtn" class="ios-danger-text">Reset to Default</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-2col">
+              <div class="field-item">
+                <label for="inputName">Full Name</label>
+                <input type="text" id="inputName" required>
+              </div>
+              <div class="field-item">
+                <label for="inputTitle">Role / Title</label>
+                <input type="text" id="inputTitle" required>
+              </div>
+            </div>
+
+            <div class="field-2col">
+              <div class="field-item">
+                <label for="inputPhone">Phone Number</label>
+                <input type="text" id="inputPhone" required>
+              </div>
+              <div class="field-item">
+                <label for="inputWhatsapp">WhatsApp Number</label>
+                <input type="text" id="inputWhatsapp" required>
+              </div>
+            </div>
+
+            <div class="field-2col">
+              <div class="field-item">
+                <label for="inputLocation">Location</label>
+                <input type="text" id="inputLocation">
+              </div>
+              <div class="field-item">
+                <label for="inputBirthday">Birthday</label>
+                <input type="text" id="inputBirthday">
+              </div>
+            </div>
+
+            <div class="field-item">
+              <label for="inputPersonalInsta">Personal Instagram (@)</label>
+              <input type="text" id="inputPersonalInsta">
+            </div>
+
+            <div class="field-item">
+              <label for="inputBio">Bio / Notes</label>
+              <textarea id="inputBio" rows="3"></textarea>
+            </div>
+          </div>
+
+          <!-- BUSINESSES TAB -->
+          <div id="adminTabBusinesses" class="cms-tab-pane">
+            <div id="adminBusinessAccordion">
+               <!-- Dynamic business forms will be injected here -->
+            </div>
+            <button type="button" id="adminAddBusinessBtn" class="ios-clean-btn btn-luxe-dark" style="margin-top: 16px; width: 100%;">
+              + Add New Business
+            </button>
+          </div>
+          <div id="adminTabSecurity" class="cms-tab-pane">
+            <div class="field-item">
+              <label for="inputNewPin">New Security PIN</label>
+              <input type="password" id="inputNewPin" maxlength="8">
+            </div>
+          </div>
+
+          <div id="adminSaveNotification" class="cms-toast" style="display: none;"></div>
+
+          <div class="cms-footer-bar">
+            <button type="submit" id="saveAdminBtn" class="ios-btn-accent">Save Changes</button>
+            <button type="button" id="exportConfigBtn" class="ios-btn-dim">Export data.json</button>
+            <button type="button" id="resetDefaultsBtn" class="ios-danger-text">Reset Defaults</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
